@@ -1,11 +1,8 @@
 const toggleTheme = document.querySelector("#theme-toggle");
-console.log(toggleTheme);
 
 const contactForm = document.querySelector("#contact-form");
-console.log(contactForm);
 
 const formMessage = document.querySelector("#form-message");
-console.log(formMessage);
 
 toggleTheme.addEventListener("click", () => {
   const body = document.querySelector("body");
