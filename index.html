@@ -3,17 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <link rel="icon" type="image/png" href="favicon.ico" />
     <title>Jawad Al Bdiwi | Portfolio Page</title>
   </head>
-  <style>
-    body.dark-mode {
-      background-color: #000000;
-      color: #ffffff;
-    }
-  </style>
   <body>
-    <button id="theme-toggle">Theme</button>
+    <button class="theme-toggle" id="theme-toggle">Theme</button>
     <header>
       <h1>Jawad Al Bdiwi</h1>
       <img
@@ -25,7 +20,7 @@
     </header>
     <br />
     <main>
-      <section>
+      <section class="about">
         <h2>About Me</h2>
         <p>
           I am an aspriring full-stack developer, currently enrolled in the Hack
@@ -45,9 +40,9 @@
         </ul>
       </section>
 
-      <section>
+      <section class="contact">
         <h2>Get in Touch</h2>
-        <form id="contact-form">
+        <form class="contact-form" id="contact-form">
           <label for="name">Name *:</label>
           <input
             type="text"
@@ -73,7 +68,9 @@
             placeholder="Enter your message here..."
             required
           ></textarea>
-          <button type="submit" id="submit-button">Submit</button>
+          <button type="submit" class="submit-button" id="submit-button">
+            Submit
+          </button>
         </form>
         <div id="form-message"></div>
       </section>
