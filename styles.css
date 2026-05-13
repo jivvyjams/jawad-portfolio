@@ -43,4 +43,121 @@ body {
     sans-serif;
   background-color: var(--bg0);
   color: var(--fg0);
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  min-height: 100vh;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, auto);
+  grid-template-areas:
+    "header header"
+    "about about"
+    "interests tech-stack"
+    "contact contact"
+    "footer footer";
+  gap: 1.5rem;
+}
+
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+}
+
+.profile {
+  width: 256px;
+  height: auto;
+  object-fit: scale-down;
+  aspect-ratio: 1 / 1;
+  background-image: url("galaxy.jpg");
+  border: 12px double var(--primary);
+  border-radius: 50%;
+}
+
+header h1 {
+  font-weight: 900;
+  margin: 0;
+}
+
+.theme-toggle {
+  height: 48px;
+  width: 48px;
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.about {
+  grid-area: about;
+}
+
+.lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.lists p {
+  text-align: left;
+}
+
+.interests {
+  grid-area: interests;
+}
+
+.tech-stack {
+  grid-area: tech-stack;
+}
+
+.contact-form {
+  grid-area: contact;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+input {
+  font-family: "Syne Variable", sans-serif;
+  background-color: var(--bg0);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 20em;
+  height: 2em;
+}
+
+textarea {
+  font-family: "Syne Variable", sans-serif;
+  font-size: 1rem;
+  background-color: var(--bg0);
+  color: var(--fg0);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  width: 20em;
+}
+
+.submit-button {
+  font-family: "Syne Variable", sans-serif;
+  font-size: 1rem;
+  width: 20em;
+  height: 2em;
+  background-color: var(--accent);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+}
+
+footer {
+  grid-area: footer;
 }
