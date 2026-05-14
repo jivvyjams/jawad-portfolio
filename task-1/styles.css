@@ -27,10 +27,11 @@
 
   --radius: 16px;
   --bg: #f3e4c9;
-  --fg: #7d5d4d;
+  --fg: #594439;
   --alt: #bfa28c;
   --accent: #babf94;
   --shadow: 10px 10px rgba(125, 93, 77, 0.15);
+  --focus: 5px 5px rgba(125, 93, 77, 0.15);
 }
 
 /* Dark Mode Colors */
@@ -40,6 +41,7 @@
   --alt: #bfa28c;
   --accent: #262726;
   --shadow: 10px 10px rgba(232, 212, 196, 0.25);
+  --focus: 5px 5px rgba(232, 212, 196, 0.25);
 }
 
 body {
@@ -166,7 +168,7 @@ li {
 
 label {
   display: block;
-  margin-bottom: 0.5rem; /* Space between label and input */
+  margin-bottom: 0.5rem;
 }
 
 input {
@@ -183,6 +185,7 @@ input {
 input:focus {
   outline: none;
   border: 3px solid var(--fg);
+  box-shadow: var(--focus);
 }
 
 textarea {
@@ -200,12 +203,17 @@ textarea {
 textarea:focus {
   outline: none;
   border: 3px solid var(--fg);
+  box-shadow: var(--focus);
+}
+
+label {
+  font-weight: bold;
 }
 
 input::placeholder,
 textarea::placeholder {
   color: var(--alt);
-  opacity: 0.45;
+  opacity: 0.75;
   font-style: italic;
 }
 
@@ -242,7 +250,7 @@ textarea::placeholder {
   transform: translateY(-1px);
   scale: 1.1;
   transition: 0.1s ease-in-out;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--focus);
 }
 
 /* Footer */
@@ -250,4 +258,100 @@ footer {
   grid-area: footer;
   font-size: 0.75rem;
   text-align: center;
+}
+
+/* Tablets/Medium Devices - 900px and below */
+@media (max-width: 900px) {
+  .site-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "about"
+      "interests"
+      "tech"
+      "contact"
+      "footer";
+  }
+
+  .contact form {
+    grid-template-areas:
+      "name"
+      "email"
+      "message"
+      "button";
+    grid-template-columns: 1fr;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+/* Mobile - 600px and below */
+@media (max-width: 600px) {
+  body {
+    width: 95%;
+    margin: 1rem auto;
+  }
+
+  header {
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+
+  .profile {
+    width: 100px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    height: 40px;
+    width: 40px;
+  }
+
+  .interests,
+  .tech {
+    padding: 0.75rem;
+  }
+
+  li {
+    padding: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    height: 2.5em;
+  }
+
+  textarea {
+    height: 5em;
+  }
+
+  .submit-button {
+    width: 100%;
+    height: 2.5em;
+  }
+
+  .contact form {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+}
+
+/* reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
