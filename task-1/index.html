@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="icon" type="image/png" href="assets/favicon.ico" />
     <title>Jawad Al Bdiwi | Portfolio Page</title>
   </head>
   <body>
-    <div class="site-grid">
+    <main class="site-grid">
       <header>
         <img
           class="profile"
-          src="cool.png"
+          src="assets/cool.png"
           alt="grinning smiley face with sunglasses giving thumbs up"
           width="200"
         />
@@ -21,46 +21,48 @@
           <p>Hello and welcome to my portolio page!</p>
         </div>
         <button class="theme-toggle" id="theme-toggle">
-          <img src="dark-theme.svg" alt="theme toggle icon" />
+          <img src="assets/dark-theme.svg" alt="theme toggle icon" />
         </button>
       </header>
-      <br />
-      <main>
-        <section>
-          <div class="about">
-            <h2>About Me</h2>
-            <p>
-              I am an aspriring full-stack developer, currently enrolled in the
-              Hack Your Future program.
-            </p>
-            <p>
-              Before that, I was working as a project coordinator at an
-              inburgering school.
-            </p>
-          </div>
-          <div class="lists">
-            <ul class="interests">
-              <p>Below are a few of my interests:</p>
-              <li>Running</li>
-              <li>Music production</li>
-              <li>Gaming</li>
-              <li>Linux</li>
-              <li>Digital privacy</li>
-            </ul>
-            <ul class="tech-stack">
-              <p>And here is my current tech stack:</p>
-              <li>JavaScript</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Bash</li>
-              <li>Git</li>
-            </ul>
-          </div>
-        </section>
 
-        <section class="contact">
-          <h2>Get in Touch</h2>
-          <form class="contact-form" id="contact-form">
+      <section class="about">
+        <h2>About Me</h2>
+        <p>
+          I am an aspriring full-stack developer, currently enrolled in the Hack
+          Your Future program.
+        </p>
+        <p>
+          Before that, I was working as a project coordinator at an inburgering
+          school.
+        </p>
+      </section>
+
+      <aside class="interests">
+        <h3>Interests:</h3>
+        <ul>
+          <li>Running</li>
+          <li>Music production</li>
+          <li>Gaming</li>
+          <li>Linux</li>
+          <li>Digital privacy</li>
+        </ul>
+      </aside>
+
+      <aside class="tech">
+        <h3>Tech Stack:</h3>
+        <ul>
+          <li>JavaScript</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>Bash</li>
+          <li>Git</li>
+        </ul>
+      </aside>
+
+      <section class="contact">
+        <h2>Get in Touch</h2>
+        <form id="contact-form">
+          <div class="name">
             <label for="name">Name *:</label>
             <input
               type="text"
@@ -69,6 +71,8 @@
               placeholder="John Smith"
               required
             />
+          </div>
+          <div class="email">
             <label for="email">E-mail *:</label>
             <input
               type="email"
@@ -77,6 +81,8 @@
               placeholder="example@domain.com"
               required
             />
+          </div>
+          <div class="message">
             <label for="message">Message *:</label>
             <textarea
               id="message"
@@ -85,16 +91,16 @@
               placeholder="Enter your message here..."
               required
             ></textarea>
-            <button type="submit" class="submit-button" id="submit-button">
-              Submit
-            </button>
-          </form>
-          <div id="form-message"></div>
-        </section>
-      </main>
-      <br />
-      <footer>HackYourFuture Front-end track week 1 assignment</footer>
-    </div>
+          </div>
+          <button type="submit" class="submit-button" id="submit-button">
+            Submit
+          </button>
+        </form>
+      </section>
+
+      <footer>HackYourFuture Front-end track week 2 assignment</footer>
+    </main>
+
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>
