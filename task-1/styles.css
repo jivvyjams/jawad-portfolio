@@ -24,7 +24,6 @@
   --font-sans:
     "Syne Variable", system-ui, -apple-system, "Segoe UI", "Open Sans",
     "Helvetica Neue", Roboto, Arial, sans-serif;
-
   --radius: 16px;
   --bg: #f3e4c9;
   --fg: #594439;
@@ -49,22 +48,21 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   width: 90%;
-  max-width: 1200px;
-  margin: 2rem auto;
+  margin: 1rem auto;
   min-height: 100vh;
 }
 
 /* Grid Layout */
 .site-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto auto auto auto;
   grid-template-areas:
-    "header header"
-    "about about"
-    "interests tech"
-    "contact contact"
-    "footer footer";
+    "header"
+    "about"
+    "interests"
+    "contact"
+    "footer";
   gap: 1.5rem;
 }
 
@@ -72,7 +70,7 @@ body {
 header {
   grid-area: header;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 1.5rem;
 }
 
@@ -88,6 +86,7 @@ header {
 }
 
 header h1 {
+  font-size: 2.5rem;
   margin: 0;
   font-weight: 800;
 }
@@ -99,6 +98,9 @@ header h1 {
 }
 
 .theme-toggle {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
   height: 48px;
   width: 48px;
   color: var(--accent);
@@ -154,7 +156,16 @@ li {
   box-shadow: var(--shadow);
 }
 
+/* FLEXBOX IMPLEMENTATION */
 .contact form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  gap: 1rem;
+}
+
+/* GRID IMPLEMENTATION */
+/* .contact form {
   display: grid;
   grid-template-areas:
     "name message"
@@ -164,7 +175,7 @@ li {
   grid-template-rows: auto auto;
   padding: 0 1rem 1rem;
   gap: 1rem;
-}
+} */
 
 label {
   display: block;
@@ -177,12 +188,12 @@ input {
   border: 2px solid var(--alt);
   border-radius: var(--radius);
   font-size: 1rem;
-  padding: 0.5rem;
-  width: 20em;
-  height: 2em;
+  padding: 1rem;
+  width: 100%;
+  height: 2.5em;
 }
 
-input:focus {
+input:focus-visible {
   outline: none;
   border: 3px solid var(--fg);
   box-shadow: var(--focus);
@@ -195,12 +206,12 @@ textarea {
   color: var(--fg);
   border: 2px solid var(--alt);
   border-radius: var(--radius);
-  padding: 0.5rem;
+  padding: 1rem;
   width: 100%;
   height: 6em;
 }
 
-textarea:focus {
+textarea:focus-visible {
   outline: none;
   border: 3px solid var(--fg);
   box-shadow: var(--focus);
@@ -219,22 +230,24 @@ textarea::placeholder {
 
 .name {
   grid-area: name;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 
 .email {
   grid-area: email;
+  padding: 1rem;
 }
 
 .message {
   grid-area: message;
+  padding: 1rem;
 }
 
 .submit-button {
   grid-area: button;
   font-family: "Syne Variable", sans-serif;
   font-size: 1rem;
-  width: 10em;
+  width: 100%;
   height: 3em;
   color: var(--fg);
   background-color: var(--bg);
@@ -260,59 +273,38 @@ footer {
   text-align: center;
 }
 
-/* Tablets/Medium Devices - 900px and below */
-@media (max-width: 900px) {
+/* Desktop - 600px and above */
+@media (min-width: 600px) {
   .site-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto auto auto;
     grid-template-areas:
-      "header"
-      "about"
-      "interests"
-      "tech"
-      "contact"
-      "footer";
+      "header header"
+      "about about"
+      "interests contact"
+      "tech contact"
+      "footer footer";
   }
 
-  .contact form {
-    grid-template-areas:
-      "name"
-      "email"
-      "message"
-      "button";
-    grid-template-columns: 1fr;
-  }
-
-  input {
-    width: 100%;
-  }
-}
-
-/* Mobile - 600px and below */
-@media (max-width: 600px) {
   body {
-    width: 95%;
-    margin: 1rem auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
   }
 
   header {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     gap: 1rem;
   }
 
-  .profile {
-    width: 100px;
-  }
-
   header h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .theme-toggle {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
     justify-self: end;
-    height: 40px;
-    width: 40px;
   }
 
   .interests,
@@ -330,11 +322,12 @@ footer {
   }
 
   textarea {
-    height: 5em;
+    height: 6em;
   }
 
   .submit-button {
-    width: 100%;
+    align-self: end;
+    width: 10em;
     height: 2.5em;
   }
 
@@ -349,9 +342,9 @@ footer {
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
   }
 }
