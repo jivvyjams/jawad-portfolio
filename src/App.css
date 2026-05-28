@@ -113,6 +113,7 @@ header h1 {
   transition: all 0.1s ease;
 }
 
+.theme-toggle:focus-visible,
 .theme-toggle:hover {
   transform: scale(1.1);
 }
@@ -172,7 +173,21 @@ li {
 }
 
 a {
+  font-weight: 600;
   color: var(--accent);
+  border-radius: var(--radius);
+  transition: 0.33s ease-in-out;
+}
+
+a:focus-visible,
+a:hover {
+  outline: none;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  color: var(--fg);
+  background-color: var(--accent);
+  transition: 0.25s ease-in-out;
+  border-radius: var(--radius);
 }
 
 /* Contact Area */
