@@ -1,4 +1,8 @@
 function Header() {
+  function handleThemeToggle() {
+    document.documentElement.classList.toggle("dark-mode");
+  }
+
   return (
     <header>
       <img
@@ -11,7 +15,11 @@ function Header() {
         <h1>Jawad Al Bdiwi</h1>
         <p>Hello and welcome to my portfolio page!</p>
       </div>
-      <button className="theme-toggle" id="theme-toggle">
+      <button
+        className="theme-toggle"
+        id="theme-toggle"
+        onClick={handleThemeToggle}
+      >
         <img src="/src/assets/dark-theme.svg" alt="theme toggle icon" />
       </button>
     </header>
