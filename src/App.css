@@ -102,19 +102,31 @@ header h1 {
 .theme-toggle {
   grid-column: 2;
   grid-row: 1;
+  display: flex;
   justify-self: end;
-  height: 48px;
-  width: 48px;
-  color: var(--accent);
+  align-items: center;
+  height: 60px;
+  width: 160px;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  color: #1a1a1a;
   background-color: #e8d4c4;
   border: 3px solid var(--alt);
-  border-radius: 50%;
+  border-radius: 220px;
   cursor: pointer;
   transition: all 0.1s ease;
 }
 
+.theme-icon {
+  padding: 0.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
 .theme-toggle:focus-visible,
 .theme-toggle:hover {
+  box-shadow: var(--shadow);
   transform: scale(1.1);
 }
 
@@ -228,7 +240,7 @@ label {
 }
 
 input {
-  font-family: "Syne Variable", sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--bg);
   border: 2px solid var(--alt);
   border-radius: var(--radius);

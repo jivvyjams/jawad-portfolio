@@ -1,5 +1,10 @@
+import { useState } from "react";
+
 function Header() {
+  const [isDark, setIsDark] = useState(false);
+
   function handleThemeToggle() {
+    setIsDark(!isDark);
     document.documentElement.classList.toggle("dark-mode");
   }
 
@@ -20,7 +25,16 @@ function Header() {
         id="theme-toggle"
         onClick={handleThemeToggle}
       >
-        <img src="/src/assets/dark-theme.svg" alt="theme toggle icon" />
+        <img
+          className="theme-icon"
+          src={
+            isDark
+              ? "/src/assets/dark-theme.svg"
+              : "/src/assets/light-theme.svg"
+          }
+          alt="theme toggle icon"
+        />
+        {isDark ? "Light mode" : "Dark mode"}
       </button>
     </header>
   );
