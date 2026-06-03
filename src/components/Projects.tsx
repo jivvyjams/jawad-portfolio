@@ -12,7 +12,7 @@ type ProjectsProps = {
   projects: Projects[];
 };
 
-function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects }: ProjectsProps) {
   if (projects.length === 0) {
     return <p>No projects yet.</p>;
   }
@@ -29,5 +29,3 @@ function Projects({ projects }: ProjectsProps) {
     </section>
   );
 }
-
-export default Projects;

@@ -12,7 +12,7 @@ interface FormErrors {
   message?: string;
 }
 
-function Contact() {
+export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -147,5 +147,3 @@ function Contact() {
     </section>
   );
 }
-
-export default Contact;

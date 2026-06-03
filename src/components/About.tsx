@@ -1,7 +1,7 @@
 import Interests from "./Interests";
 import TechStack from "./TechStack";
 
-function About() {
+export default function About() {
   return (
     <>
       <section className="about">
@@ -20,5 +20,3 @@ function About() {
     </>
   );
 }
-
-export default About;

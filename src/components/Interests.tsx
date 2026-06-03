@@ -1,4 +1,4 @@
-function Interests() {
+export default function Interests() {
   return (
     <aside className="interests" aria-label="interests">
       <h3>Interests:</h3>
@@ -12,5 +12,3 @@ function Interests() {
     </aside>
   );
 }
-
-export default Interests;

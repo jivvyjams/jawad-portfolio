@@ -5,7 +5,12 @@ type ProjectCardProps = {
   url?: string;
 };
 
-function ProjectCard({ title, description, techStack, url }: ProjectCardProps) {
+export default function ProjectCard({
+  title,
+  description,
+  techStack,
+  url,
+}: ProjectCardProps) {
   return (
     <li className="project-card">
       <h3>{title}</h3>
@@ -21,5 +26,3 @@ function ProjectCard({ title, description, techStack, url }: ProjectCardProps) {
     </li>
   );
 }
-
-export default ProjectCard;

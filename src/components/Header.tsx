@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Header() {
+export default function Header() {
   const [isDark, setIsDark] = useState(false);
 
   function handleThemeToggle() {
@@ -39,5 +39,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;
