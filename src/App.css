@@ -52,6 +52,11 @@ body {
   min-height: 100vh;
 }
 
+.error {
+  font-weight: bold;
+  color: red;
+}
+
 /* Grid Layout */
 .site-grid {
   display: grid;
@@ -108,7 +113,7 @@ header h1 {
   height: 60px;
   width: 160px;
   font-family: var(--font-sans);
-  font-weight: 800;
+  font-weight: bold;
   color: #1a1a1a;
   background-color: #e8d4c4;
   border: 3px solid var(--alt);
@@ -119,6 +124,7 @@ header h1 {
 
 .theme-icon {
   padding: 0.5rem;
+  padding-right: 1rem;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -323,6 +329,12 @@ textarea::placeholder {
   scale: 1.1;
   transition: 0.1s ease-in-out;
   box-shadow: var(--focus);
+}
+
+.submit-button:disabled {
+  border: none;
+  opacity: 66%;
+  cursor: not-allowed;
 }
 
 /* Footer */

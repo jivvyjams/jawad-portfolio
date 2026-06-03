@@ -4,7 +4,7 @@ function Header() {
   const [isDark, setIsDark] = useState(false);
 
   function handleThemeToggle() {
-    setIsDark(!isDark);
+    setIsDark((prev) => !prev);
     document.documentElement.classList.toggle("dark-mode");
   }
 
