@@ -77,7 +77,6 @@ export default function Contact() {
     setFormData({ name: "", email: "", message: "" });
     setSubmitted(true);
     setErrors({});
-    console.log(formData);
   }
 
   const hasErrors = Object.values(errors).some(Boolean);
