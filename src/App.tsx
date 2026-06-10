@@ -1,52 +1,28 @@
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Projects from "./components/Projects";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  url?: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Porfolio Page",
-    description:
-      "This page you're looking at - built with HTML and CSS in weeks 1 and 2.",
-    techStack: ["HTML", "CSS"],
-    url: "https://github.com/jivvyjams/portfolio-assignment/tree/week-4#",
-  },
-  {
-    id: 2,
-    title: "Desktop Environment",
-    description:
-      "Custom configured Linux desktop environment utilizing a minimal tiling window manager.",
-    techStack: ["Arch Linux", "SwayWM", "Foot", "Dunst", "Cliphist", "Neovim"],
-  },
-  {
-    id: 3,
-    title: "YAPD Original Soundtrack",
-    description:
-      "Soundtrack I composed for an open-source, roguelike mobile game.",
-    techStack: ["FL Studio", "Native Instruments", "Audacity"],
-    url: "https://soundcloud.com/jivvyjams/sets/yapd-soundtrack",
-  },
-];
+import { Routes, Route } from "react-router";
+import Navigation from "./components/Navigation";
+import HomePage from "./pages/HomePage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <main className="site-grid">
-      <Header />
-      <About />
-      <Projects projects={projects} />
-      <Contact />
-      <Footer />
-    </main>
+    <div className="min-h-screen bg-bg font-sans text-fg">
+      <div className="mx-auto w-11/12 max-w-6xl py-6 sm:py-10">
+        <Navigation />
+        <main className="flex flex-col gap-8">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <footer className="mt-8 border-t-2 border-alt pt-4 text-center text-xs">
+          &copy; {new Date().getFullYear()} HackYourFuture assignment week 4
+        </footer>
+      </div>
+    </div>
   );
 }
 
