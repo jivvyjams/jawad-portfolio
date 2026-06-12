@@ -52,6 +52,11 @@ body {
   min-height: 100vh;
 }
 
+.error {
+  font-weight: bold;
+  color: red;
+}
+
 /* Grid Layout */
 .site-grid {
   display: grid;
@@ -102,19 +107,32 @@ header h1 {
 .theme-toggle {
   grid-column: 2;
   grid-row: 1;
+  display: flex;
   justify-self: end;
-  height: 48px;
-  width: 48px;
-  color: var(--accent);
+  align-items: center;
+  height: 60px;
+  width: 160px;
+  font-family: var(--font-sans);
+  font-weight: bold;
+  color: #1a1a1a;
   background-color: #e8d4c4;
   border: 3px solid var(--alt);
-  border-radius: 50%;
+  border-radius: 220px;
   cursor: pointer;
   transition: all 0.1s ease;
 }
 
+.theme-icon {
+  padding: 0.5rem;
+  padding-right: 1rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
 .theme-toggle:focus-visible,
 .theme-toggle:hover {
+  box-shadow: var(--shadow);
   transform: scale(1.1);
 }
 
@@ -153,6 +171,51 @@ li {
   padding: 1rem 0;
   /* background-color: var(--bg); */
   border-bottom: 3px solid var(--alt);
+}
+
+.project-search {
+  margin-bottom: 1rem;
+}
+
+.tech-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.tech-list {
+  list-style: none;
+}
+
+.tech-filters button {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  color: var(--fg);
+  background-color: var(--bg);
+  border: 2px solid var(--alt);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+.tech-filters button:focus-visible,
+.tech-filters button:hover {
+  outline: none;
+  color: var(--bg);
+  background-color: var(--fg);
+  border-color: var(--fg);
+  box-shadow: var(--focus);
+}
+
+.tech-filters button.active {
+  font-weight: bold;
+  color: var(--fg);
+  background-color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--focus);
 }
 
 .project-list {
@@ -228,7 +291,7 @@ label {
 }
 
 input {
-  font-family: "Syne Variable", sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--bg);
   border: 2px solid var(--alt);
   border-radius: var(--radius);
@@ -290,7 +353,7 @@ textarea::placeholder {
 
 .submit-button {
   grid-area: button;
-  font-family: "Syne Variable", sans-serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
   width: 100%;
   height: 3em;
@@ -311,6 +374,12 @@ textarea::placeholder {
   scale: 1.1;
   transition: 0.1s ease-in-out;
   box-shadow: var(--focus);
+}
+
+.submit-button:disabled {
+  border: none;
+  opacity: 66%;
+  cursor: not-allowed;
 }
 
 /* Footer */
