@@ -60,7 +60,7 @@ function ProjectCard({ title, description, techStack, url }: Project) {
   );
 }
 
-function ProjectsPage() {
+export default function ProjectsPage() {
   const [search, setSearch] = useState("");
   const [activeTech, setActiveTech] = useState<string | null>(null);
 
@@ -90,8 +90,7 @@ function ProjectsPage() {
         placeholder="Search by tech stack..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        aria-label="Search projects by tech stack"
-        className="mt-6 w-full rounded-2xl border-2 border-alt bg-fg px-4 py-2 text-bg placeholder:text-bg/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        className="mt-6 w-full rounded-2xl border-2 border-alt bg-fg/10 px-4 py-2 text-fg placeholder:text-fg/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
       />
 
       <ul className="mt-4 flex flex-wrap gap-2">
@@ -133,5 +132,3 @@ function ProjectsPage() {
     </section>
   );
 }
-
-export default ProjectsPage;

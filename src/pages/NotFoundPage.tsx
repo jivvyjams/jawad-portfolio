@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-function NotFoundPage() {
+export default function NotFoundPage() {
   return (
     <section className="py-12 text-center">
       <h2 className="text-3xl font-bold sm:text-4xl">404 — Page Not Found</h2>
@@ -16,5 +16,3 @@ function NotFoundPage() {
     </section>
   );
 }
-
-export default NotFoundPage;

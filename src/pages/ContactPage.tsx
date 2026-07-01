@@ -1,23 +1,43 @@
-import type { ComponentProps } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-type SubmitHandler = NonNullable<ComponentProps<"form">["onSubmit"]>;
+type ContactFormData = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 const fieldClasses =
   "w-full rounded-2xl border-2 border-alt bg-bg p-3 text-fg placeholder:italic placeholder:text-alt/75 focus-visible:border-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg";
 
-function ContactPage() {
+export default function ContactPage() {
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormData>();
 
-  const handleSubmit: SubmitHandler = (event) => {
-    event.preventDefault();
-    navigate("/");
-  };
+  async function onSubmit(data: ContactFormData) {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log("Contact form submitted:", data);
+      reset();
+      navigate("/");
+    } catch {
+      setError("root", { message: "Something went wrong. Please try again." });
+    }
+  }
 
   return (
     <section className="rounded-2xl border-2 border-alt bg-accent p-6 text-fg shadow-card">
       <h2 className="text-2xl font-bold sm:text-3xl">Get in Touch</h2>
-      <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-4 flex flex-col gap-4"
+      >
         <div>
           <label htmlFor="name" className="mb-2 block font-bold">
             Name *:
@@ -25,24 +45,46 @@ function ContactPage() {
           <input
             type="text"
             id="name"
-            name="name"
             placeholder="John Smith"
-            required
-            className={fieldClasses}
+            aria-invalid={errors.name ? "true" : "false"}
+            className={`${fieldClasses} ${errors.name ? "border-red-500" : ""}`}
+            {...register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 2,
+                message: "Name must be at least 2 characters",
+              },
+            })}
           />
+          {errors.name && (
+            <p role="alert" className="mt-1 text-sm text-red-600">
+              {errors.name.message}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="email" className="mb-2 block font-bold">
             E-mail *:
           </label>
           <input
-            type="email"
+            type="text"
             id="email"
-            name="email"
             placeholder="example@domain.com"
-            required
-            className={fieldClasses}
+            aria-invalid={errors.email ? "true" : "false"}
+            className={`${fieldClasses} ${errors.email ? "border-red-500" : ""}`}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email address",
+              },
+            })}
           />
+          {errors.email && (
+            <p role="alert" className="mt-1 text-sm text-red-600">
+              {errors.email.message}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="message" className="mb-2 block font-bold">
@@ -50,22 +92,37 @@ function ContactPage() {
           </label>
           <textarea
             id="message"
-            name="message"
             rows={4}
             placeholder="Enter your message here..."
-            required
-            className={`${fieldClasses} resize-y`}
+            aria-invalid={errors.message ? "true" : "false"}
+            className={`${fieldClasses} resize-y ${errors.message ? "border-red-500" : ""}`}
+            {...register("message", {
+              required: "Message is required",
+              minLength: {
+                value: 20,
+                message: "Message must be at least 20 characters",
+              },
+            })}
           ></textarea>
+          {errors.message && (
+            <p role="alert" className="mt-1 text-sm text-red-600">
+              {errors.message.message}
+            </p>
+          )}
         </div>
         <button
           type="submit"
-          className="mt-2 cursor-pointer self-start rounded-2xl border-2 border-alt bg-bg px-6 py-3 font-bold text-fg transition hover:scale-105 hover:border-fg hover:bg-fg hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg sm:w-40"
+          disabled={isSubmitting}
+          className="mt-2 cursor-pointer self-start rounded-2xl border-2 border-alt bg-bg px-6 py-3 font-bold text-fg transition hover:scale-105 hover:border-fg hover:bg-fg hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:bg-bg disabled:hover:text-fg sm:w-40"
         >
-          Submit
+          {isSubmitting ? "Sending..." : "Send message"}
         </button>
+        {errors.root && (
+          <p role="alert" className="text-sm text-red-600">
+            {errors.root.message}
+          </p>
+        )}
       </form>
     </section>
   );
 }
-
-export default ContactPage;

@@ -10,7 +10,7 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
     : `${baseLink} text-fg hover:bg-accent hover:text-bg`;
 }
 
-function Navigation() {
+export default function Navigation() {
   return (
     <nav
       className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b-2 border-alt pb-4"
@@ -37,5 +37,3 @@ function Navigation() {
     </nav>
   );
 }
-
-export default Navigation;

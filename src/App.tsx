@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router";
+import { ErrorBoundary } from "react-error-boundary";
+import { SectionError } from "./components/SectionError";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -12,9 +14,30 @@ export default function App() {
         <Navigation />
         <main className="flex flex-col gap-8">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route
+              path="/"
+              element={
+                <ErrorBoundary FallbackComponent={SectionError}>
+                  <HomePage />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <ErrorBoundary FallbackComponent={SectionError}>
+                  <ProjectsPage />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <ErrorBoundary FallbackComponent={SectionError}>
+                  <ContactPage />
+                </ErrorBoundary>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

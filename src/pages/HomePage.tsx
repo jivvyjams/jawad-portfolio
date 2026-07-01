@@ -1,6 +1,6 @@
 import profileImg from "../assets/cool.png";
 
-function HomePage() {
+export default function HomePage() {
   return (
     <>
       <header className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
@@ -65,5 +65,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;
