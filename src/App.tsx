@@ -5,7 +5,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-function App() {
+export default function App() {
   return (
     <div className="min-h-screen bg-bg font-sans text-fg">
       <div className="mx-auto w-11/12 max-w-6xl py-6 sm:py-10">
@@ -25,5 +25,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

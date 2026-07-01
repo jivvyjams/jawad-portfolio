@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type Project = {
   id: number;
   title: string;
@@ -59,18 +61,75 @@ function ProjectCard({ title, description, techStack, url }: Project) {
 }
 
 function ProjectsPage() {
+  const [search, setSearch] = useState("");
+  const [activeTech, setActiveTech] = useState<string | null>(null);
+
   if (projects.length === 0) {
     return <p className="text-lg">No projects yet.</p>;
   }
 
+  const allTech = [
+    ...new Set(projects.flatMap((project) => project.techStack)),
+  ].sort();
+
+  const query = search.trim().toLowerCase();
+  const filteredProjects = projects.filter((project) => {
+    const matchesSearch =
+      !query ||
+      project.techStack.some((tech) => tech.toLowerCase().includes(query));
+    const matchesTech = !activeTech || project.techStack.includes(activeTech);
+    return matchesSearch && matchesTech;
+  });
+
   return (
     <section>
       <h2 className="text-2xl font-bold sm:text-3xl">Projects</h2>
-      <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} {...project} />
+
+      <input
+        type="search"
+        placeholder="Search by tech stack..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        aria-label="Search projects by tech stack"
+        className="mt-6 w-full rounded-2xl border-2 border-alt bg-fg px-4 py-2 text-bg placeholder:text-bg/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+      />
+
+      <ul className="mt-4 flex flex-wrap gap-2">
+        <li>
+          <button
+            type="button"
+            onClick={() => setActiveTech(null)}
+            className={`rounded-2xl border-2 border-alt px-3 py-1 text-sm font-semibold transition hover:bg-accent hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+              activeTech === null ? "bg-brand text-fg" : "text-fg"
+            }`}
+          >
+            All
+          </button>
+        </li>
+        {allTech.map((tech) => (
+          <li key={tech}>
+            <button
+              type="button"
+              onClick={() => setActiveTech(tech)}
+              className={`rounded-2xl border-2 border-alt px-3 py-1 text-sm font-semibold transition hover:bg-accent hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+                activeTech === tech ? "bg-brand text-fg" : "text-fg"
+              }`}
+            >
+              {tech}
+            </button>
+          </li>
         ))}
       </ul>
+
+      {filteredProjects.length === 0 ? (
+        <p className="mt-6 text-lg">No projects match your filter.</p>
+      ) : (
+        <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} {...project} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
