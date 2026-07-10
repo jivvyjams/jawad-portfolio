@@ -1,5 +1,7 @@
+import { useEffect, useRef, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 type ContactFormData = {
   name: string;
@@ -11,24 +13,43 @@ const fieldClasses =
   "w-full rounded-2xl border-2 border-alt bg-bg p-3 text-fg placeholder:italic placeholder:text-alt/75 focus-visible:border-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg";
 
 export default function ContactPage() {
+  useDocumentTitle("Contact — Jawad Al Bdiwi");
+
   const navigate = useNavigate();
+  const [isPending, startTransition] = useTransition();
+  const nameRef = useRef<HTMLInputElement>(null);
   const {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>();
 
-  async function onSubmit(data: ContactFormData) {
-    try {
+  useEffect(() => {
+    nameRef.current?.focus();
+  }, []);
+
+  const { ref: nameRegisterRef, ...nameRegisterRest } = register("name", {
+    required: "Name is required",
+    minLength: {
+      value: 2,
+      message: "Name must be at least 2 characters",
+    },
+  });
+
+  // Combine React Hook Form's ref with your own
+  const setNameRef = (el: HTMLInputElement | null) => {
+    nameRegisterRef(el); // React Hook Form needs this
+    (nameRef as React.MutableRefObject<HTMLInputElement | null>).current = el;
+  };
+
+  function onSubmit(data: ContactFormData) {
+    startTransition(async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log("Contact form submitted:", data);
       reset();
       navigate("/");
-    } catch {
-      setError("root", { message: "Something went wrong. Please try again." });
-    }
+    });
   }
 
   return (
@@ -48,13 +69,8 @@ export default function ContactPage() {
             placeholder="John Smith"
             aria-invalid={errors.name ? "true" : "false"}
             className={`${fieldClasses} ${errors.name ? "border-red-500" : ""}`}
-            {...register("name", {
-              required: "Name is required",
-              minLength: {
-                value: 2,
-                message: "Name must be at least 2 characters",
-              },
-            })}
+            ref={setNameRef}
+            {...nameRegisterRest}
           />
           {errors.name && (
             <p role="alert" className="mt-1 text-sm text-red-600">
@@ -112,10 +128,10 @@ export default function ContactPage() {
         </div>
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isPending || isSubmitting}
           className="mt-2 cursor-pointer self-start rounded-2xl border-2 border-alt bg-bg px-6 py-3 font-bold text-fg transition hover:scale-105 hover:border-fg hover:bg-fg hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:bg-bg disabled:hover:text-fg sm:w-40"
         >
-          {isSubmitting ? "Sending..." : "Send message"}
+          {isPending ? "Sending..." : "Send message"}
         </button>
         {errors.root && (
           <p role="alert" className="text-sm text-red-600">

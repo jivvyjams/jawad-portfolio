@@ -1,6 +1,9 @@
 import profileImg from "../assets/cool.png";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function HomePage() {
+  useDocumentTitle("Home — Jawad Al Bdiwi");
+
   return (
     <>
       <header className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
