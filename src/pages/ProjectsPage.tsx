@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 type Project = {
   id: number;
@@ -61,6 +62,8 @@ function ProjectCard({ title, description, techStack, url }: Project) {
 }
 
 export default function ProjectsPage() {
+  useDocumentTitle("Projects — Jawad Al Bdiwi");
+
   const [search, setSearch] = useState("");
   const [activeTech, setActiveTech] = useState<string | null>(null);
 

@@ -1,4 +1,4 @@
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 import moonIcon from "../assets/dark-theme.svg";
 import sunIcon from "../assets/light-theme.svg";
 
