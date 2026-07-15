@@ -1,44 +1,20 @@
+"use client";
+
 import { useState } from "react";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import Link from "next/link";
+import type { Project } from "@/data/projects";
 
-type Project = {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  url?: string;
-};
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Porfolio Page",
-    description:
-      "This page you're looking at - built with HTML and CSS in weeks 1 and 2.",
-    techStack: ["HTML", "CSS"],
-    url: "https://github.com/jivvyjams/portfolio-assignment/tree/week-4#",
-  },
-  {
-    id: 2,
-    title: "Desktop Environment",
-    description:
-      "Custom configured Linux desktop environment utilizing a minimal tiling window manager.",
-    techStack: ["Arch Linux", "SwayWM", "Foot", "Dunst", "Cliphist", "Neovim"],
-  },
-  {
-    id: 3,
-    title: "YAPD Original Soundtrack",
-    description:
-      "Soundtrack I composed for an open-source, roguelike mobile game.",
-    techStack: ["FL Studio", "Native Instruments", "Audacity"],
-    url: "https://soundcloud.com/jivvyjams/sets/yapd-soundtrack",
-  },
-];
-
-function ProjectCard({ title, description, techStack, url }: Project) {
+function ProjectCard({ id, title, description, techStack, url }: Project) {
   return (
     <li className="flex flex-col rounded-2xl border-2 border-alt bg-fg p-6 text-bg shadow-card">
-      <h3 className="text-xl font-bold">{title}</h3>
+      <h3 className="text-xl font-bold">
+        <Link
+          href={`/projects/${id}`}
+          className="underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg"
+        >
+          {title}
+        </Link>
+      </h3>
       <p className="mt-2 flex-1 leading-relaxed">{description}</p>
 
       {techStack.length > 0 && (
@@ -61,15 +37,9 @@ function ProjectCard({ title, description, techStack, url }: Project) {
   );
 }
 
-export default function ProjectsPage() {
-  useDocumentTitle("Projects — Jawad Al Bdiwi");
-
+export default function ProjectsList({ projects }: { projects: Project[] }) {
   const [search, setSearch] = useState("");
   const [activeTech, setActiveTech] = useState<string | null>(null);
-
-  if (projects.length === 0) {
-    return <p className="text-lg">No projects yet.</p>;
-  }
 
   const allTech = [
     ...new Set(projects.flatMap((project) => project.techStack)),
@@ -85,9 +55,7 @@ export default function ProjectsPage() {
   });
 
   return (
-    <section>
-      <h2 className="text-2xl font-bold sm:text-3xl">Projects</h2>
-
+    <>
       <input
         type="search"
         placeholder="Search by tech stack..."
@@ -132,6 +100,6 @@ export default function ProjectsPage() {
           ))}
         </ul>
       )}
-    </section>
+    </>
   );
 }
