@@ -1,15 +1,16 @@
-import profileImg from "../assets/cool.png";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home — Jawad Al Bdiwi",
+};
 
 export default function HomePage() {
-  useDocumentTitle("Home — Jawad Al Bdiwi");
-
   return (
     <>
       <header className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
         <img
           className="h-32 w-32 shrink-0 rounded-full border-4 border-alt object-scale-down"
-          src={profileImg}
+          src="/cool.png"
           alt="grinning smiley face with sunglasses giving thumbs up"
         />
         <div>
@@ -59,8 +60,8 @@ export default function HomePage() {
               <li>JavaScript</li>
               <li>HTML</li>
               <li>CSS</li>
-              <li>Bash</li>
-              <li>Git</li>
+              <li>React</li>
+              <li>Tailwind</li>
             </ul>
           </aside>
         </div>

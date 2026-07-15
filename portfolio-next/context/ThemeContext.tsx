@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useState, type ReactNode } from "react";
 
 export type ThemeContextValue = {
@@ -10,8 +12,10 @@ export const ThemeContext = createContext<ThemeContextValue | undefined>(
 );
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [dark, setDark] = useState(() =>
-    document.documentElement.classList.contains("dark-mode"),
+  const [dark, setDark] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      document.documentElement.classList.contains("dark-mode"),
   );
 
   function toggleDark() {
